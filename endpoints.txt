@@ -1,0 +1,138 @@
+API ENDPOINTS DOCUMENTATION
+
+1. GET ALL TASKS
+URL: GET /api/tasks/
+HEADERS: 
+  - Content-Type: application/json
+RESPONSE: 
+  - 200 OK
+  {
+    [
+      {
+        "id": 1,
+        "name": "string",
+        "description": "string",
+        "status": boolean
+      },
+      ...
+    ]
+  }
+Funcionamiento: Retorna un listado de todas las tareas existentes en el sistema
+
+-------------------------------------------
+
+2. GET SPECIFIC TASK
+URL: GET /api/tasks/{task_id}/
+HEADERS: 
+  - Content-Type: application/json
+RESPONSE:
+  - 200 OK
+  {
+    "id": 1,
+    "name": "string",
+    "description": "string",
+    "status": boolean
+  }
+  - 404 NOT FOUND
+  {
+    "error": "Task not found"
+  }
+Funcionamiento: Obtiene los detalles de una tarea específica usando su ID
+
+-------------------------------------------
+
+3. CREATE TASK
+URL: POST /api/tasks/create/
+HEADERS: 
+  - Content-Type: application/json
+BODY:
+{
+    "name": "string",
+    "description": "string"
+}
+RESPONSE:
+  - 201 CREATED
+  {
+    "id": 1,
+    "name": "string",
+    "description": "string",
+    "status": false
+  }
+  - 400 BAD REQUEST
+  {
+    "field": ["error message"]
+  }
+Funcionamiento: Crea una nueva tarea con los datos proporcionados
+
+-------------------------------------------
+
+4. UPDATE TASK
+URL: PUT /api/tasks/update/{task_id}/
+HEADERS: 
+  - Content-Type: application/json
+BODY:
+{
+    "name": "string",
+    "description": "string",
+    "status": boolean
+}
+RESPONSE:
+  - 200 OK
+  {
+    "id": 1,
+    "name": "string",
+    "description": "string",
+    "status": boolean
+  }
+  - 404 NOT FOUND
+  {
+    "error": "Task not found"
+  }
+  - 400 BAD REQUEST
+  {
+    "field": ["error message"]
+  }
+Funcionamiento: Actualiza todos los campos de una tarea existente
+
+-------------------------------------------
+
+5. DELETE TASK
+URL: DELETE /api/tasks/delete/{task_id}/
+HEADERS: 
+  - Content-Type: application/json
+RESPONSE:
+  - 204 NO CONTENT
+  - 404 NOT FOUND
+  {
+    "error": "Task not found"
+  }
+Funcionamiento: Elimina permanentemente una tarea del sistema
+
+-------------------------------------------
+
+6. TOGGLE TASK STATUS
+URL: POST /api/tasks/{task_id}/toggle-status/
+HEADERS: 
+  - Content-Type: application/json
+RESPONSE:
+  - 200 OK
+  {
+    "id": 1,
+    "name": "string",
+    "description": "string",
+    "status": boolean
+  }
+  - 404 NOT FOUND
+  {
+    "error": "Task not found"
+  }
+Funcionamiento: Cambia el estado de una tarea de completada a no completada o viceversa
+
+-------------------------------------------
+
+NOTAS ADICIONALES:
+- Todas las rutas están bajo el prefijo /api/
+- Los campos en las respuestas siempre incluyen: id, name, description y status
+- Todas las respuestas de error incluyen un mensaje descriptivo
+- El status code 404 se usa cuando no se encuentra la tarea
+- El status code 400 se usa cuando hay errores de validación en los datos enviados 
