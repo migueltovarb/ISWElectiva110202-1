@@ -1,14 +1,10 @@
-name:  catalogservice
+name: orderservice
 
 on:
   push:
     branches:
       - main
   workflow_dispatch:
-
-concurrency:
-  group: 'catalogservice-deploy'
-  cancel-in-progress: true
 
 jobs:
   build:
@@ -25,18 +21,19 @@ jobs:
           python-version: '3.13'
 
       - name: Create and start virtual environment
-        working-directory: backend/Catalog
+        working-directory: backend/Order
         run: |
           python -m venv venv
           source venv/bin/activate
 
       - name: Install dependencies
-        working-directory: backend/Catalog
+        working-directory: backend/Order
         run: pip install -r requirements.txt
 
       - name: Zip artifact for deployment
-        working-directory: backend/Catalog
-        run: zip -r ../../release.zip . -x "venv/**"
+        working-directory: backend/Order
+        run: |
+          zip -r ../../release.zip . -x "venv/**"
 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v4
@@ -66,13 +63,13 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_0701B9F7BC60497B87CAA4B45A01D756 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_4A6AA37DCFD142C999BC3243FB2E1F07 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_3621F780A4064FE0B442DE52A6D287EC }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_27946C4A73684B71B24B1D0F3E700A04 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_EA19243AB51845F3BF56DCE3DEA8B814 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_9EE99F912A0B4647A0A25C4C7FFCB600 }}
 
-      - name: 'Deploy to Azure Web App'
+      - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
         with:
-          app-name: 'catalogservice'
+          app-name: 'orderservice'
           package: .
