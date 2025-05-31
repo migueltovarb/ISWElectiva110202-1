@@ -5,6 +5,11 @@ ISWElectiva110202-1
 
 WeEat es una plataforma web moderna tanto para browser como para móvil para realizar domicilios y pedidos en línea de tu restaurante favorito. Con una interfaz fácil de usar y un sistema eficiente, hacer pedidos nunca fue tan sencillo.
 
+
+URL FRONTEND:    https://orange-rock-0ad59890f.6.azurestaticapps.net
+
+
+URLS BACKEND
 ---
 
 # Proyecto creado por 
@@ -22,7 +27,6 @@ Tomas Benavides Calderon.
 ✅ **Seguimiento de tu pedido** – Sigue el estado de tu pedido desde la cocina hasta la entrega.  
 
 ---
-
 ## 📱 ¿Cómo funciona?  
 
 1. **Explora** el menú y elige tus platos favoritos.  
