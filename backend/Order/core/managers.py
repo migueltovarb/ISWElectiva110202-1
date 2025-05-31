@@ -35,8 +35,7 @@ class OrderManager(models.Manager):
 
     def calculate_price(self, order_id):
         order = self.get(id_order=order_id)
-        # Here you would typically get product prices from the Product service
-        # For now, we'll assume each product costs 100 (this should be updated)
+       
         total = sum(100 * op.quantity for op in order.orders_products_set.all())
         order.total_price = total
         order.save()
